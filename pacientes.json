@@ -1,0 +1,100 @@
+{
+  "PATIENTS": [
+    {
+      "PutRequest": {
+        "Item": {
+          "birthdate": {
+            "S": "1984-01-01"
+          },
+          "email": {
+            "S": "humberto@mail.com"
+          },
+          "name": {
+            "S": "Humberto"
+          },
+          "patientId": {
+            "S": "1234-abc"
+          },
+          "status": {
+            "BOOL": true
+          },
+          "phoneNumber": {
+            "S": "11999995555"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "birthdate": {
+            "S": "1975-01-01"
+          },
+          "email": {
+            "S": "maria@mail.com"
+          },
+          "name": {
+            "S": "Maria"
+          },
+          "patientId": {
+            "S": "1234-def"
+          },
+          "status": {
+            "BOOL": true
+          },
+          "phoneNumber": {
+            "S": "11999995550"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "birthdate": {
+            "S": "1990-01-01"
+          },
+          "email": {
+            "S": "carol@mail.com"
+          },
+          "name": {
+            "S": "Carolina"
+          },
+          "patientId": {
+            "S": "523-xxx"
+          },
+          "status": {
+            "BOOL": true
+          },
+          "phoneNumber": {
+            "S": "11999990000"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "birthdate": {
+            "S": "2006-01-01"
+          },
+          "email": {
+            "S": "natalia@mail.com"
+          },
+          "name": {
+            "S": "Natalia"
+          },
+          "patientId": {
+            "S": "621-nnn"
+          },
+          "status": {
+            "BOOL": true
+          },
+          "phoneNumber": {
+            "S": "11999998877"
+          }
+        }
+      }
+    }
+  ]
+}

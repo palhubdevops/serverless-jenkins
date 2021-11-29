@@ -1,0 +1,128 @@
+service: patient-record
+frameworkVersion: '2'
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+
+# you can overwrite defaults here
+stage: dev
+region: us-east-1
+
+iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:PutItem
+        - dynamodb:DeleteItem
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+      Resource: "arn:aws:dynamodb:us-east-1:952582097844:table/PATIENTS"
+
+custom:
+  dynamodb:
+    stages:
+      - dev 
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+    migration:
+      dir: offline/migrations
+
+
+functions:
+  getPacients:
+    handler: handler.getPatients
+    role: lambdaRole
+    events:
+      - http:
+          path: patients
+          method: get
+
+  getPatientById:
+    handler: handler.getPatientById
+    role: lambdaRole
+    events:
+      - http:
+          path: patients/{patientId}
+          method: get
+
+  postPatient:
+    handler: handler.postPatient
+    role: lambdaRole
+    events:
+      - http:
+          path: patients
+          method: post
+  
+  updatePatient:
+    handler: handler.updatePatient
+    role: lambdaRole
+    events:
+      - http:
+          path: patients/{patientId}
+          method: put
+  
+  deletePatient:
+    handler: handler.deletePatient
+    role: lambdaRole
+    events:
+      - http:
+          path: patients/{patientId}
+          method: delete
+
+resources:
+  Resources:
+    PacientesTables:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: PATIENTS
+        AttributeDefinitions:
+          - AttributeName: patient_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: patient_id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    lambdaRole:
+      Type: AWS::IAM::Role
+      Properties:
+        Path: /service-role/
+        RoleName: lambdaRole
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action: sts:AssumeRole
+              Principal:
+                Service:
+                - lambda.amazonaws.com
+                - edgelambda.amazonaws.com
+        Policies:
+          - PolicyName: lambdaPolicy
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+              - Effect: Allow
+                Action:
+                - "logs:CreateLogGroup"
+                - "logs:CreateLogStream"
+                - "logs:PutLogEvents"
+                Resource: "arn:aws:dynamodb:us-east-1:952582097844:table/PATIENTS"
+              - Effect: Allow
+                Action:
+                  - dynamodb:Query
+                  - dynamodb:Scan
+                  - dynamodb:PutItem
+                  - dynamodb:DeleteItem
+                  - dynamodb:GetItem
+                  - dynamodb:UpdateItem
+                Resource: "arn:aws:dynamodb:us-east-1:952582097844:table/PATIENTS"
