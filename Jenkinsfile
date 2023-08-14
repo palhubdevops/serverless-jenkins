@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git url: 'https://github.com/giosassis/serveless-api', branch: 'main'
+                git url: 'https://github.com/palhubdevops/serverless-jenkins.git', branch: 'main'
                 sh "npm i"  
             }
         }
