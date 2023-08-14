@@ -48,7 +48,7 @@ describe("API Patients", () => {
     it("should return a list of patients", async () => {
       const mock = createDocumentClientMock();
       const api = createHandler(mock);
-      const response = await api.getPacient();
+      const response = await api.getPatients();
       expect(response.statusCode).to.be.equal(200);
       expect(mock.spy.scanSpy).to.have.been.called;
     });
