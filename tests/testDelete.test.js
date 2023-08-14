@@ -57,7 +57,7 @@ function createDocumentClientMock() {
 }
 
 function createHandler(mock) {
-  return proxyquire("../../handler", {
+  return proxyquire("../handler", {
     "aws-sdk": {
       DynamoDB: {
         DocumentClient: mock.DocumentClient,
