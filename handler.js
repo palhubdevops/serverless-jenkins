@@ -7,7 +7,6 @@ const patients = [
 
 const { v4: uuidv4 } = require("uuid");
 const AWS = require("aws-sdk");
-
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const params = {
   TableName: "PATIENTS",
