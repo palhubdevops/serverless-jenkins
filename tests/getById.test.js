@@ -48,7 +48,7 @@ describe("API Patients", () => {
     it("should return patient by id", async () => {
       const mock = createDocumentClientMock();
       const api = createHandler(mock);
-      const response = await api.getPacient({
+      const response = await api.getPatients({
         event: {
           pathParameters: {
             patientId: "123-abc",
