@@ -20,7 +20,7 @@ provider:
         - dynamodb:DeleteItem
         - dynamodb:GetItem
         - dynamodb:UpdateItem
-      Resource: "arn:aws:dynamodb:us-east-1:952582097844:table/PATIENTS"
+      Resource: "arn:aws:iam::003496477872:user/jenkins-lambda"
 
 custom:
   dynamodb:
@@ -114,7 +114,7 @@ resources:
                 - "logs:CreateLogGroup"
                 - "logs:CreateLogStream"
                 - "logs:PutLogEvents"
-                Resource: "arn:aws:dynamodb:us-east-1:952582097844:table/PATIENTS"
+                Resource: "arn:aws:iam::003496477872:user/jenkins-lambda"
               - Effect: Allow
                 Action:
                   - dynamodb:Query
@@ -123,4 +123,4 @@ resources:
                   - dynamodb:DeleteItem
                   - dynamodb:GetItem
                   - dynamodb:UpdateItem
-                Resource: "arn:aws:dynamodb:us-east-1:952582097844:table/PATIENTS"
+                Resource: "arn:aws:iam::003496477872:user/jenkins-lambda"
