@@ -1,5 +1,5 @@
 service: patient-record
-frameworkVersion: '2'
+frameworkVersion: '3.34.o'
 
 plugins:
   - serverless-offline
